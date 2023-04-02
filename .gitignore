@@ -4,6 +4,8 @@
 *.dll
 *.so
 *.dylib
+go.sum
+application-build-\d{19,}
 
 # Test binary, built with `go test -c`
 *.test
