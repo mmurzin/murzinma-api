@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"golang.org/x/crypto/acme/autocert"
 )
 
@@ -16,6 +17,8 @@ func main() {
 	e.AutoTLSManager.Cache = autocert.DirCache("/var/www/.cache")
 	//e.Use(middleware.Recover())
 	//e.Use(middleware.Logger())
+	e.Use(middleware.HTTPSRedirect())
+	e.Pre(middleware.HTTPSNonWWWRedirect())
 	e.GET("/", func(c echo.Context) error {
 		return c.HTML(http.StatusOK, `
 			<h1>Welcome to Echo!</h1>
